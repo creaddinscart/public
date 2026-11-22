@@ -1,0 +1,6 @@
+accessWidener	v2	named
+
+# Runtime block-texture patching (new texture pipeline: 1.21.6+ / 1.21.10 / 1.21.11).
+# Modify each sprite's backing NativeImage, then re-blit the atlas.
+accessible	field	net/minecraft/client/texture/SpriteContents	image	Lnet/minecraft/client/texture/NativeImage;
+accessible	method	net/minecraft/client/texture/SpriteAtlasTexture	upload	()V

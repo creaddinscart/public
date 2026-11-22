@@ -1,0 +1,11 @@
+// Root build: declares the Loom plugin (applied per-subproject) and shared metadata.
+// Each version subproject sets its own minecraft/yarn/fabric-api then applies common.gradle.
+
+plugins {
+    id 'fabric-loom' version "${loom_version}" apply false
+}
+
+allprojects {
+    group = project.maven_group
+    version = project.mod_version
+}

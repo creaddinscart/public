@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "${id}",
+  "version": "${version}",
+  "name": "${name}",
+  "description": "${description}",
+  "authors": [
+    "Maker SX",
+    "CREADDINSCART STUDIO"
+  ],
+  "contact": {
+    "homepage": "https://www.shit.pub/studio/",
+    "sources": "https://www.shit.pub/studio/"
+  },
+  "license": "MIT",
+  "icon": "assets/pixelchanger/icon.png",
+  "accessWidener": "pixelchanger.accesswidener",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.creaddinscart.pixelchanger.PixelChangerClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": "==${minecraft_version}",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

@@ -1,0 +1,4 @@
+accessWidener	v2	named
+
+# Runtime block-texture patching (old texture pipeline: 1.21.0).
+# Accessors filled in from the 1.21.0 mappings (combined atlas NativeImage + upload).

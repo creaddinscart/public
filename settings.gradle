@@ -1,0 +1,14 @@
+pluginManagement {
+    repositories {
+        maven { name = 'Fabric'; url = 'https://maven.fabricmc.net/' }
+        maven { name = 'Mojang'; url = 'https://libraries.minecraft.net/' }
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'PixelChanger'
+
+include 'v121'
+include 'v12110'
+include 'v12111'

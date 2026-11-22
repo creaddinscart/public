@@ -1,0 +1,68 @@
+// Shared configuration applied by each version subproject AFTER it defines:
+//   minecraft_version, yarn_version, fabric_api_version   (ext props in the child build.gradle)
+//
+// Architecture:
+//   common/src/...        -> version-independent core (store, palette, keybind, editor base, patch driver)
+//   <module>/src/...      -> per-version PixelEditorScreen (input API) + AtlasPatcher (texture pipeline)
+//                            + pixelchanger.accesswidener (per-version internals)
+
+apply plugin: 'java-library'
+apply plugin: 'fabric-loom'
+
+repositories {
+    maven { name = 'Fabric'; url = 'https://maven.fabricmc.net/' }
+    maven { name = 'Mojang'; url = 'https://libraries.minecraft.net/' }
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+    options.encoding = 'UTF-8'
+}
+
+sourceSets {
+    main {
+        java.srcDirs = ["${rootDir}/common/src/main/java", "src/main/java"]
+        resources.srcDirs = ["${rootDir}/common/src/main/resources", "src/main/resources"]
+    }
+}
+
+loom {
+    // AW is in src/main/resources and also declared via the "accessWidener" field in
+    // fabric.mod.json; Loom's remapJar remaps that entry named -> intermediary.
+    accessWidenerPath = file("src/main/resources/${project.mod_id}.accesswidener")
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_version}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+}
+
+processResources {
+    inputs.property 'version', project.mod_version
+    inputs.property 'id', project.mod_id
+    inputs.property 'name', project.mod_name
+    inputs.property 'description', project.mod_description
+    inputs.property 'minecraft_version', project.minecraft_version
+
+    filesMatching('fabric.mod.json') {
+        expand(
+            'version': project.mod_version,
+            'id': project.mod_id,
+            'name': project.mod_name,
+            'description': project.mod_description,
+            'minecraft_version': project.minecraft_version
+        )
+    }
+}
+
+jar {
+    from("${rootDir}/LICENSE") { rename { 'LICENSE' } }
+}

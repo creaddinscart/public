@@ -1,0 +1,7 @@
+ext {
+    minecraft_version  = '1.21.11'
+    yarn_version       = '1.21.11+build.6'
+    fabric_api_version = '0.141.6+1.21.11'
+}
+apply from: rootProject.file('common.gradle')
+base { archivesName = "PixelChanger-${minecraft_version}" }

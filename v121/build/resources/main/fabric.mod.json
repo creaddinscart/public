@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "pixelchanger",
+  "version": "1.0.0",
+  "name": "Pixel Changer",
+  "description": "Pixel Changer - a live in-world block texture editor. Aim at any block and press F8 to pop open all of its pixels, pick a brush, type a color sequence number and paint the block pixel by pixel. Built by Maker SX through CREADDINSCART STUDIO.",
+  "authors": [
+    "Maker SX",
+    "CREADDINSCART STUDIO"
+  ],
+  "contact": {
+    "homepage": "https://www.shit.pub/studio/",
+    "sources": "https://www.shit.pub/studio/"
+  },
+  "license": "MIT",
+  "icon": "assets/pixelchanger/icon.png",
+  "accessWidener": "pixelchanger.accesswidener",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.creaddinscart.pixelchanger.PixelChangerClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": "==1.21",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
