@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "videorenderer",
+  "version": "1.0.0",
+  "name": "Video Renderer",
+  "description": "Video Renderer - watch and preview web videos inside Minecraft. Pick a world, paste a video link, and the mod auto-parses it over the local network to decode and render the stream in-game. Created by Btoom KtCher through CREADDINSCART STUDIO. Built by CREADDINSCART STUDIO.",
+  "authors": [
+    "Btoom KtCher (via CREADDINSCART STUDIO)",
+    "CREADDINSCART STUDIO"
+  ],
+  "contact": {
+    "homepage": "https://www.shit.pub/studio/",
+    "sources": "https://www.shit.pub/studio/"
+  },
+  "license": "MIT",
+  "icon": "assets/videorenderer/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "studio.shitpub.videorenderer.VideoRendererClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "=1.21",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

@@ -1,0 +1,71 @@
+plugins {
+    id 'fabric-loom' version "${loom_version}"
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = "${project.archives_base_name}-${project.mcVersion}"
+}
+
+repositories {
+    mavenCentral()
+    maven { url = "https://maven.fabricmc.net/" }
+}
+
+loom {
+    mods {
+        "videorenderer" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            // Version-specific render shim (isolates the GuiGraphics blit API drift).
+            srcDir file("src/shim/${project.shimDir}")
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.mcVersion}"
+    mappings "net.fabricmc:yarn:${project.yarnVersion}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loaderVersion}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabricVersion}"
+
+    // Pure-Java H.264 / MP4 decoder so video links can be decoded in-game without native libs.
+    implementation "org.jcodec:jcodec:0.2.5"
+    implementation "org.jcodec:jcodec-javase:0.2.5"
+    include "org.jcodec:jcodec:0.2.5"
+    include "org.jcodec:jcodec-javase:0.2.5"
+}
+
+processResources {
+    def tokens = [
+        version   : project.mod_version,
+        mc_version: project.mcVersion,
+        mod_id    : project.mod_id,
+        mod_name  : project.mod_name,
+    ]
+    inputs.properties tokens
+    filesMatching("fabric.mod.json") {
+        expand tokens
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+    // Minecraft 1.21.x runs on Java 21 -> always emit release-21 bytecode.
+    it.options.release = 21
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}

@@ -1,0 +1,14 @@
+pluginManagement {
+    repositories {
+        maven { url = "https://maven.fabricmc.net/" }
+        maven { url = "https://repo.gradle.org/gradle/libs-releases/" }
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.10.0'
+}
+
+rootProject.name = 'videorenderer'
