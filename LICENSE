@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Creaddinscart
+Copyright (c) 2026 CREADDINSCART STUDIO
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,149 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+================================================================================
+CREADDINSCART STUDIO — Four Conditions of Use
+================================================================================
+
+Versions edited in CREADDINSCART STUDIO, or built from a copy that was, carry
+four permanent obligations. They apply to the project page, the repository
+readme, the release notes and the software itself.
+
+--------------------------------------------------------------------------------
+Condition 1 — Author Attribution
+--------------------------------------------------------------------------------
+
+The author field names both CREADDINSCART STUDIO and the human author, in that
+order:
+
+    CREADDINSCART STUDIO <author name>
+
+The author name is yours to choose and must be a real, identifiable name or
+handle.
+
+Where it goes: package metadata, README, release notes, About box.
+
+--------------------------------------------------------------------------------
+Condition 2 — Made-With Line
+--------------------------------------------------------------------------------
+
+The project displays the words:
+
+    Made with CREADDINSCART STUDIO
+
+in a visible place: header, footer, About screen or splash, at least once per
+published version.
+
+Where it goes: interface, readme, project page.
+
+--------------------------------------------------------------------------------
+Condition 3 — Official Link
+--------------------------------------------------------------------------------
+
+The same place carries a working link or button to:
+
+    https://www.shit.pub/studio/
+
+It must be clickable in the interface, not only written in a licence file.
+
+Where it goes: interface, readme, project page.
+
+--------------------------------------------------------------------------------
+Condition 4 — Code Reuse
+--------------------------------------------------------------------------------
+
+If you use CREADDINSCART STUDIO's editing library, its templates or any part of
+its code — a module, a helper, or a single function — you state the source as
+CREADDINSCART STUDIO: in the file header, the dependency manifest or the credits,
+wherever the code is used. This holds whether or not you publish through
+CREADDINSCART STUDIO, and whether or not you changed the code.
+
+  What you took                          Where the credit goes
+  -------------------------------------- --------------------------------------
+  The editing library, as a dependency   Dependency list, and the file that
+                                         imports it.
+  A template or starter project          Readme, and the header of every file
+                                         that came from the template.
+  A whole module or class                File header of that module, naming
+                                         CREADDINSCART STUDIO and the upstream
+                                         project.
+  A single function, snippet or table    A one-line comment above it:
+                                         "from CREADDINSCART STUDIO".
+  Code copied and then rewritten         The same credit. Rewriting does not
+                                         make it yours; if the structure or
+                                         logic came from here, the source stays.
+
+Where it goes: source file header, dependency list, credits, readme.
+
+================================================================================
+Agreement
+================================================================================
+
+WHAT YOU ACCEPT:
+
+  • Every version you publish through CREADDINSCART STUDIO carries the four
+    conditions above, unchanged in meaning.
+  • You do not remove, hide, shrink or restyle the attribution to make it
+    illegible, and you do not move it behind a menu that is closed by default.
+  • You do not present CREADDINSCART STUDIO as your own product, and you do not
+    rename it.
+  • You keep the upstream licence of the project you edited, including its
+    notice and source-availability terms.
+  • Our code is credited at the point where you use it, even when it is one
+    function and even when nothing is published.
+  • You are responsible for what you publish: no secrets, no personal data, no
+    code you have no right to redistribute.
+
+WHAT YOU KEEP:
+
+  • Copyright in your own edits.
+  • Control of your GitHub repository, its visibility, its history and its
+    releases.
+  • The right to stop using CREADDINSCART STUDIO at any time. Existing published
+    versions keep their credit lines; nothing else is owed.
+
+WHAT CREADDINSCART STUDIO DOES NOT DO:
+
+  • It does not take ownership of your repository or your code.
+  • It does not relicense an upstream project. If the upstream licence is
+    incompatible with your plan, the plan stops there.
+  • It does not publish anything without your confirmation; a repository is only
+    needed if you choose to push there.
+
+Using CREADDINSCART STUDIO means agreeing to all of this. If any condition is
+unacceptable, do not use CREADDINSCART STUDIO. Editing a project by hand without
+CREADDINSCART STUDIO is unaffected, and that project keeps its own licence only.
+
+================================================================================
+Attribution Snippet
+================================================================================
+
+These lines satisfy conditions 1 and 2 in plain HTML. They use no images and no
+external assets, so they work on any page, in any theme, with no network access.
+
+Footer or header line:
+
+    Made with <a href="https://www.shit.pub/studio/">CREADDINSCART STUDIO</a>
+
+Author field:
+
+    CREADDINSCART STUDIO <your name>
+
+About box:
+
+    Built in CREADDINSCART STUDIO.
+    Author: CREADDINSCART STUDIO <your name>
+    CREADDINSCART STUDIO: https://www.shit.pub/studio/
+
+Style them however the project is styled. Square marks and plain text are
+preferred; the line has to stay readable at the project's normal body size.
+
+================================================================================
+Contact
+================================================================================
+
+  X — @creaddinscart
+  Studio page — https://www.shit.pub/studio/
+  GitHub — github.com/creaddinscart
