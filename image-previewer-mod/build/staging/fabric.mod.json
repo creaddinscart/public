@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "imagepreviewer",
+  "version": "1.0.0",
+  "name": "Image Previewer",
+  "description": "Built by CREADDINSCART STUDIO. Renders linked images directly in-game from chat messages. Click any image URL to preview it.",
+  "authors": [
+    "GMA",
+    "CREADDINSCART STUDIO"
+  ],
+  "contact": {
+    "homepage": "https://www.shit.pub/studio/",
+    "sources": "https://www.shit.pub/studio/",
+    "issues": "https://www.shit.pub/studio/"
+  },
+  "license": "MIT",
+  "icon": "assets/imagepreviewer/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "studio.creaddinscart.imagepreviewer.ImagePreviewerMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": ">=1.16.5",
+    "java": ">=17",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}
