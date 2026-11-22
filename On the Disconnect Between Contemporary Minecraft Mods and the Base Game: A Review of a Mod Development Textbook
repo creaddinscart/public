@@ -1,0 +1,359 @@
+DIALECT AND MOTHER TONGUE
+On the Rift Between Contemporary Minecraft Mods and Vanilla
+With a review of Minecraft Modding For Kids (Guthals, Foster & Handley)
+Imprint: CREADDINSCART STUDIO Series: Game Culture Criticism · Long Review Under review: Sarah Guthals, Stephen Foster, Lindsey Handley, Minecraft Modding For Kids (For Dummies / Wiley); Chinese edition, Posts & Telecom Press Genre: Critical review essay Keywords: Minecraft; modding; vanilla-ness; poetics of withholding; knowledge externalisation; version stratigraphy; loader politics
+
+A mother tongue is great because it is small — small enough that anyone can say their own thing in it. A dialect is great because it is partial — partial enough to say what the mother tongue cannot. The danger was never that there would be too many dialects. The danger is that the dialects stop needing the mother tongue at all.
+
+I. A Book That Teaches You How to Leave
+Reviewing this book under the heading "rift" requires no apology. It is an honest book — honest enough to print its position on the cover. It does not teach you how to live better inside Minecraft. It teaches you how to rewrite Minecraft.
+
+The three authors come out of ThoughtSTEM, an education-technology company, and the book runs on LearnToMod, an online environment. Its teaching grammar is visual blocks; its incentive grammar is badges. A sequence of graded projects walks a young reader from player to author: build something, defend it, script a projectile, change a creature's behaviour, wire up a multiplayer game.
+
+As computational-thinking pedagogy, this is genuinely well made. The floor is low, the loop closes fast, and a beginner gets the single most valuable experience in programming education — I changed the world, and the world obeyed. Minecraft is the best available handle for that lesson: it arrives with a world, a physics, and an audience already installed.
+
+I am not going to scold the authors for this. Teaching children to write their first line of code inside a place they already love is a kindness, and it works.
+
+But a reviewer's job is to name the cost. This book treats Minecraft as material, not as a work. Vanilla does not appear in it as an aesthetic object. It appears as a writable surface — a runtime that happens to supply a render loop and an entity system. When earning the badge replaces watching the sun go down as the terminal point of play, a fundamental displacement has already occurred: the game has stopped being something experienced and become something operated.
+
+Which gives me my first judgement:
+
+This book is a symptom of the rift, not a diagnosis of it.
+
+It presupposes the rift's legitimacy and builds on top of the presupposition. It teaches how to make a mod. It never teaches what kind of mod is worth making. Registration, events, resource management — all present as technical procedure. Vanilla-ness never appears as a design question.
+
+To review it properly, we first have to rescue the word "rift" from sentiment.
+
+II. Defining the Rift
+In community usage, "the rift" is usually a complaint: with mods installed it doesn't feel like Minecraft anymore. That usage has no analytical value, because it collapses three distinct phenomena into one mood. I propose separating them:
+
+(1) Technical rift — incompatibility produced by loaders, mappings, versions, platforms. An engineering fact. Measurable. (2) Aesthetic rift — a collision of design ethics: vanilla signifies by withholding, mods signify by adding. A critical judgement. Requires argument. (3) Social rift — the player commons fracturing into mutually unintelligible dialect groups, its conversation migrating from world to configuration. A cultural consequence. Observable.
+
+And I propose three relations a mod can hold to vanilla. This taxonomy carries the whole essay:
+
+Extension — adds primitives; returns combinatorial authorship to the player.
+Replacement — adds finished goods; withdraws combinatorial authorship into the mod author.
+Parasitism — adds neither; merely bends the payoff curve, converting vanilla's time and risk into instant reward.
+Technically these can look identical. All three register a block, subscribe to an event, edit a loot table. The difference is a single question:
+
+Does this treat the player as an author, or as a consumer?
+
+That is the fulcrum of everything that follows.
+
+III. The Ontological Cut: Withholding vs. Addition
+Vanilla Minecraft's design ethic is withholding. No manual. No quest chain. No stat panel. The rules are hidden inside physics: water flows, sand falls, light levels decide monsters, hunger decides whether you can sprint. Knowledge arrives as embodied trial and error. The first time a creeper kills you, you do not learn "creeper: X damage." You learn when you hear the hiss, turn around.
+
+The aesthetic consequence is enormous. Because the game refuses to explain, the player is forced to name the world. My house. The mineshaft. That river that drowned me. Vanilla's blankness is the delivery room of player narrative. Fifteen years of Minecraft writing, video, and architecture are, at bottom, attempts to fill that blank.
+
+A mod's ethic is addition. It must justify its own installation, so it supplies panels, progress bars, quantifiable returns. This is not a moral failing; it is selection pressure. A mod gets roughly three seconds on a CurseForge or Modrinth listing page, and "I make your world more reticent" does not convert.
+
+So the first layer of the aesthetic rift is this:
+
+Vanilla leaves meaning for the player to produce. Mods pre-produce meaning and hand it to the player to consume.
+
+The counterexample must come immediately, or the argument is crude. Twilight Forest locks progression behind a boss order — strongly authored, "finished-goods" in structure. Yet it supplies precisely what vanilla most lacks: place. The Naga Courtyard, the Lich Tower, the Hydra Lair are not stat containers. They are locations. What it adds is a geography of feeling, not a reward curve.
+
+So strong authorship is not the same as rift. The question is which dimension the authorship is spent on.
+
+Conversely, a mod that advertises itself as "just decoration" can quietly rewrite vanilla's causality. Take the gentle, furniture-shaped category — the Japanese-aesthetic mods, Bamboo and its relatives: tatami, sliding doors, cherry trees, hot springs, a few foods and weapons, almost no new creatures. Pure interior design, apparently.
+
+But if it offers instantly ripen and recolour a tree with dye, it has converted vanilla's growth-time into purchasable immediacy. If it hangs kill this mob, chance at that rare item on a weapon, it has converted vanilla's risk–reward structure into an external shortcut.
+
+A mod that only decorates is still rewriting the mother tongue's theory of time and cause. That is what a dialect is:
+
+It borrows the mother tongue's vocabulary and installs a different grammar.
+
+IV. The Epistemological Cut: The JEI Phenomenon
+Old mod players remember NEI. Then JEI. They compress an entire modded universe into a searchable sidebar: recipes, uses, fuel values, output chances — everything, one keystroke away.
+
+This is modding's greatest piece of infrastructure and its deepest epistemological break.
+
+Consider two ways of knowing a block.
+
+In vanilla, you know the redstone repeater because you crafted it, placed it, discovered it delays a signal, discovered it can latch. Your knowledge carries手感 — hand-feel — and a history of failure.
+
+In modded, you know a machine because you looked up its recipe in JEI and then placed it correctly. Your knowledge is a query result, not a sedimented experience.
+
+Call it the JEI phenomenon:
+
+The player's understanding of a mod is completed through a lookup interface, not through play.
+
+The sharpest evidence is BuildCraft's Gates. BuildCraft — SpaceToad, from 2011 — is a founding text of tech modding: pipes, the quarry, MJ power, a design language that shaped a generation of automation. But its most exquisite component is the Gate: assembly table, chipsets, and a player-authored condition/action structure that effectively promotes vanilla redstone's binary signal into a programmable logic layer.
+
+This is superb design. It also announces something:
+
+The entrance to this mod is not in the game. It is in the wiki.
+
+Machines and gates whose names inherit early-community conventions are, without external documentation, close to unguessable.
+
+Vanilla knowledge is endogenous. Mod knowledge is exogenous. When a player must leave the game in order to enter it, the rift is no longer a difference of style. It is a fracture in the structure of knowing.
+
+In fairness: this is not the mods' unilateral sin. JEI became mandatory because the modded universe inflated past human enumeration. When a pack carries three hundred mods and tens of thousands of recipes, lookup is not laziness — it is the only viable epistemology.
+
+Here the rift is a scale effect: quantity itself destroys vanilla-style embodied knowing.
+
+Which also explains the moral prestige that "vanilla+" has acquired in recent years. Those mods promise that you will not have to leave the game to understand them. Create is the most successful fulfilment of that promise ever shipped, and we will return to it.
+
+V. The Technical Cut: The Coronation of the Abstraction Layer
+To understand the technical rift, look at the road modding has walked.
+
+The invasive era. Edit the jar. Overwrite the class. Cut into bytecode with ASM. The relation between mod and vanilla was hand-to-hand: you had to read Mojang's obfuscated, historically sedimented code and get your hands inside it. Conflicts were constant; compatibility was luck.
+
+The framework era. Forge builds registries, an event bus, lifecycle phases, Capabilities, standardised fluid units. Content is normalised into registrable objects; behaviour into subscribable events. Fabric takes the other road — a thin core plus Mixin, turning invasion into a controlled, declarative surgery. NeoForge forks from Forge in 2023. Quilt had already forked from Fabric. The disputes have not settled.
+
+Engineering-wise: progress, order, maintainability. Critically: the coronation of an abstraction layer.
+
+Hence the paradox:
+
+To let mods extend the game more freely, the framework must first format the game.
+
+The overwhelming majority of mods today are not in conversation with vanilla. They are in conversation with the Forge/Fabric/NeoForge API. Vanilla recedes into an implementation detail — something encapsulated, routed around, "made compatible."
+
+The mother tongue becomes a runtime library.
+
+There is a beautifully concrete symptom of this: mappings. Minecraft's Java shipped obfuscated for years. The community had to build its own naming apparatus — MCP on one side, Yarn on the other — before it could speak about the game at all. Only when Mojang began publishing official obfuscation maps in 2019 did that folk lexicography get partially absorbed by the crown.
+
+Note the absurdity and the grandeur of the procedure:
+
+In order for the dialects to speak, the community first had to reinvent the mother tongue's readability.
+
+That is the deepest evidence of rift — not that mods betrayed vanilla, but that mods were once forced to reconstruct vanilla's legibility from scratch.
+
+Mixin's普及 — its ubiquity — carries a second ethical shift. When you can inject precisely into one line of one vanilla method, your relation to vanilla changes from extension to editing. Technically more elegant; critically more dangerous:
+
+Lowering the cost of editing lowers the cost of replacement.
+
+An author who merely wants to tweak a loot table now holds the same scalpel as an author who wants to rewrite world generation. The tool does not distinguish extension from parasitism. It makes them equally easy.
+
+Which is exactly where the book under review has a hole. It teaches how to hold the scalpel. It never teaches which cut not to make.
+
+VI. The Temporal Cut: Version Stratigraphy
+Modding history is not a line of progress. It is stratigraphy.
+
+1.7.10 — not a version number, an era. A vast body of classic mods is permanently parked here, forming a time-layer parallel to the mainline and no longer intersecting it. Major packs still sit on this bedrock, because the ecosystem's interdependencies have lithified.
+1.12.2 — the second stable stratum; the deposition surface of the tech/magic golden age.
+1.16.5 — the third great platform after the Nether Update, and the launch pad of the modern Fabric ecosystem.
+1.18 — world height moved to −64…320 and terrain generation rewritten. For worldgen mods this was not an update. It was orogeny.
+~1.20.5 — item data migrated from NBT to the components system. Another mass fracture.
+1.21 — the Crafter arrives, and a decade-old modded privilege becomes a vanilla block.
+Every vanilla update deepens the fissure. New players grow up in the new version; old players keep an entire unmigratable life in the old one. A phenomenon rare in game history emerges:
+
+Players of the same game live in different geological periods, and cannot intermarry.
+
+And vanilla is not painless here. Vanilla updates manufacture their own exiles: combat reworks, terrain rewrites, performance regressions, the disappearance of a landscape from an old save. People who walked alongside the game for a decade can find themselves evicted by the work itself.
+
+So an important correction:
+
+The rift is not mods' one-way betrayal of vanilla. It is the fundamental contradiction between "updating" and "dwelling."
+
+A game is a building under permanent construction. Players make homes in it. Mods only amplify the contradiction — they scale the home from a wooden hut to an industrial city-state, and the relocation cost from an evening to a thousand hours.
+
+GregTech: New Horizons — the enormous expert pack still standing on 1.7.10 — is the monument to this contradiction. It is magnificent, self-consistent, admirable, and permanently outside Minecraft's update history. It is no longer a mod of Minecraft. It is another country, built out of Minecraft's bricks.
+
+VII. The Social Cut: Loader Politics, Platforms, Governance
+Technical fracture eventually sediments into social fracture, and social fracture has its own political history.
+
+(1) Loader politics. The Forge/Fabric/NeoForge/Quilt split partitions the commons into incompatible constituencies. "What loader are you on?" becomes an identity question rather than a technical preference. And because forks so often begin in governance and personnel rather than in architecture, we should say plainly: many cracks in the modding ecosystem are cracks between people.
+
+(2) Plugins are not mods. The Bukkit/Spigot/Paper lineage and the Forge/Fabric lineage hold two different worldviews. The plugin lineage assumes the world is fixed; the rules are administrable. The mod lineage assumes the world is extensible; content can grow. Hybrid servers are the long-running, long-unstable attempt to make these two worldviews cohabit.
+
+(3) Platform and commerce. Java modding culture rests on a default ethic of free, open, modifiable. Bedrock routes creation through an official marketplace with review and payment. Each regime has its rationale: one maximises experimental freedom, the other maximises safety and reach. But they cultivate different creative personalities — the dialect poet versus the contracted supplier. Once "officially supported extension" and "unauthorised民间 rewriting" run in parallel, the rift escalates from technical to institutional.
+
+(4) The Chinese case, briefly, for anglophone readers. The Chinese edition is operated under licence, with a component store, a virtual currency, rented-server multiplayer, and a launcher ecosystem forming a self-contained user path. Its virtue is a radically lowered entry barrier. Its cost is that configuring a world becomes a purchasing behaviour. When the community's live topics are which components are worth buying, how to spend the currency, can my rented server take mods — the conversation has already migrated from world to governance and configuration.
+
+Which is the terminal form of the social rift:
+
+People stop talking about what they did in the world, and talk only about how they get into it.
+
+VIII. Reverse Colonisation: Vanilla Is Modding Itself
+Here I must turn the gun around, or this review is dishonest.
+
+Vanilla was never a pure mother tongue. It has been absorbing dialects continuously. The community's standard examples are pistons and horses — both prototyped in modded space before entering the official game. (Editorial flag: verify primary sources before asserting.)
+
+The more structural absorption is recent:
+
+Datapacks, and data-driven loot tables, recipes, and worldgen, demote "changing the game" from programming to writing JSON. This is the crown's institutional co-optation of the modding demand.
+Display entities, custom model data, functions and commands let map-makers approach mod-like expressiveness without writing Java.
+The Crafter (1.21). Automatic crafting was once the defining privilege of BuildCraft, Applied Energistics and their descendants. It is now a vanilla block.
+What does this mean? It means:
+
+Vanilla is turning itself into an official modpack.
+
+It keeps adding. It keeps supplying panels and progression — advancements, the recipe book, the structured combat of trial chambers. It keeps trading withholding for guidance.
+
+So the aesthetic rift takes an ironic turn:
+
+The distance between mod and vanilla is closing — but on the side of complexity, not on the side of simplicity. The dialect did not return to the mother tongue. The mother tongue learned the dialect's rhetoric.
+
+Two consequences for criticism.
+
+First, every nostalgic argument for "returning to pure vanilla" must submit to audit. The vanilla it misses may simply be the version it played at fifteen.
+
+Second, vanilla-ness can no longer be defined as "less content." It must be redefined as a grammatical property. That is the criterion in §X.
+
+IX. In Defence of the Rift
+The case for the defence must be given in full, or this essay is just another nostalgic screed.
+
+First: the rift is a tax on creativity. BuildCraft could inaugurate pipe-based automation and shape a generation of tech and magic mods precisely because it refused to be a footnote to vanilla. The authors of the founding mods were, characteristically, specialists or deep amateurs: BuildCraft in construction sites and logistics (the blue-and-yellow striping, the scaffolding, the mesh pipes — an urban crane aesthetic transposed); Forestry in apiculture and genetic breeding; Railcraft in signalling and dispatch; Factorization in a mathematician's naming of machines; Thermal Expansion in industrial process; Thaumcraft in an entire self-built epistemology of the occult.
+
+Expertise naturally overflows generality.
+
+To demand that mods fit vanilla seamlessly is to demand that specialists speak only the standard language. And every important dialect in the history of human knowledge began as an offence against the standard language.
+
+Second: the rift creates authorship vanilla cannot supply. Tinkers' Construct turns a tool from an item into a choice with a material history. Thaumcraft turns research into a ritual in which the player must personally organise knowledge. TerraFirmaCraft rewrites survival from hunger-bar management into a long negotiation with geology, season, and rot.
+
+These are not extensions of vanilla's line. They are separate works.
+
+Better Than Wolves pushes this to its limit: named as a rebuke, publicly dissatisfied with the official design direction, long parked on an old version, declaring through total rewrite — I do not have to follow you. Sociologically this is schism. Artistically it is a manifesto. Very few works in game history are granted their own secession manifesto. Minecraft has one.
+
+Third: the modpack supplies a third authorship. If a single mod is a word, a pack is a sentence — and a new creative subject is born: the pack author. They do not write blocks. They write relations: recipes altered, progression gated, tech trees re-ordered, until three hundred mods that never met each other tell one coherent story. GTNH is an epic; SevTech: Ages is a history of civilisation; RLCraft is a cruelty play.
+
+Which suggests the rift may be in the process of being sublated. The fragments have not returned to unity; they have been reorganised at a higher level.
+
+The dialect did not go home to the mother tongue. It grew a literature of its own.
+
+If this essay stopped at §IX, its conclusion would be optimistic. §X must supply the criterion — because not every fragment grows into literature.
+
+X. The Criterion: Primitives or Finished Goods
+One sentence:
+
+What adds primitives extends. What adds finished goods replaces. What only bends the payoff curve parasitises.
+
+A primitive is a small, orthogonal, infinitely combinable unit of rule. Vanilla is itself the exemplary primitive design: redstone has only powered and unpowered, and it evolved computers. Blocks have only place and break, and they evolved architecture.
+
+Vanilla's greatness is not that it contains much. It is that its primitives are few and its combinatorial space is enormous.
+
+By this measure:
+
+BuildCraft's Gates are primitives. Complex, documentation-dependent, high cognitive entry — but they hand conditional logic to the player to compose. Therefore: complex without being a rift.
+
+Create is the finest contemporary primitive design. Rotational force, stress, transmission, movable structures — and almost no one-click solutions. Its aesthetic is cognate with vanilla's: gears and shafts, not holographic panels. It demonstrates the crucial thing:
+
+Cognitive entry cost can be endogenous to the game. You watch the shaft turn and you understand that it is transmitting force.
+
+That is the strongest available refutation of the JEI phenomenon.
+
+Botania has long held to a refusal of single-block solutions, decomposing automation into flowers and mana flows the player must choreograph by hand. It would rather inconvenience the player than confiscate the combinatorial authorship.
+
+Conversely, content that merely stacks tiers, rarities, damage multipliers and drop shortcuts is finished goods, or worse, parasitic. It does not require understanding. It requires equipping. It makes the game easier and the game thinner.
+
+One sharp corollary:
+
+Both ethics can live inside a single mod.
+
+In the decoration-type mod above, the dyeable, force-ripenable cherry tree is a primitive — it hands the player authorship over colour and time. The weapon with a rare-drop shortcut is a finished good — a closed reward rule. One mod can be extension and parasitism at once.
+
+Which is the truest picture of the contemporary ecosystem:
+
+Not a war between good mods and bad mods, but a civil war inside every mod, between the extension impulse and the consumption impulse.
+
+The referee of that civil war ought to be design self-awareness. Design self-awareness ought to be cultivated by education.
+
+And so we return to the book.
+
+XI. The Book's Missing Chapter
+Now Minecraft Modding For Kids can be judged fairly.
+
+Its virtues are real. Project-based, visual, low-floor, fast-loop. As an introduction to programming for young readers it is competent and it is generous. It converts "I can change the rules" from an abstraction into an obtainable experience, and that empowerment is precious in computing education. It does not pretend to be design theory. That honesty deserves respect.
+
+Its limits are also real, and they are structural.
+
+First, it treats vanilla as a runtime, not as a work. The organising logic is feature implementation, not experience design. A student learns how to register an item — not whose day that item will change once it enters a world.
+
+Second, its incentive system trains completion, not judgement. Badges reward it runs. Nothing rewards it was thought through. When the assessment regime recognises only working output, students will naturally mistake "I can add a thing" for "this thing should be added."
+
+Third, it is missing a chapter: Why Are You Changing This Loot Table?
+
+That chapter should be short. It must exist. It should ask three questions:
+
+Are you adding a primitive or a finished good?
+Does understanding your content require leaving the game?
+Are you shortening the player's operations, or the player's experience?
+The third matters most.
+
+Shortening operations is a kindness — nobody wants two hours at the furnace. Shortening experience is an injury — nobody should skip the evening they first saw the sun set.
+
+Nearly the whole ethics of mod design compresses into that distinction.
+
+So the final judgement on this book:
+
+The rift was not manufactured by malice. It is a default setting of the education system.
+
+The value of this book is that it lets us see the default clearly. The next generation of authors it produces may be fluent in the API and never once ask why am I changing this loot table. That is not the authors' fault. It is a blank in the entire modding-education chain — and that blank is precisely the place a review should point at.
+
+XII. Editorial Recommendations
+If the publisher or authors consider a revised edition, I recommend three chapters, placed after the technical material and before the project work.
+
+Chapter X — Vanilla-ness as a Design Constraint. Redstone as the case study: few primitives × infinite combination. Exercise: add exactly one block, and make ten new ways to play possible.
+
+Chapter Y — A Cognitive Cost Budget. Students write a "understandable without external documentation" specification for their own mod, then run a blind test: a classmate plays for ten minutes with no wiki; log every sticking point. This converts the JEI phenomenon from abstract criticism into measurable homework.
+
+Chapter Z — Extension, Replacement, Parasitism. Three contrasting cases. Students implement the same feature in all three modes, then argue: which one made the world richer, which made it thinner.
+
+None of these chapters teaches a new API. They are the only route by which this book graduates from tool manual to textbook.
+
+XIII. Coda: A Catalogue, or a World
+Vanilla is a mother tongue. Mods are dialects.
+
+The mother tongue is great because it is small enough that anyone can say their own thing in it. The dialect is great because it is partial enough to say what the mother tongue cannot.
+
+The danger was never too many dialects. The danger is dialects that no longer need the mother tongue —
+
+when all creation circulates inside the framework, talking only to the framework; when players come to know the world only through JEI; when versions become impassable strata; when the commons has nothing left to discuss but loaders, platforms and currency;
+
+then Minecraft is no longer a world. It is a catalogue of mutually incompatible worlds.
+
+The catalogue is thick. It is prosperous. It is productive.
+
+But there is no evening in a catalogue.
+
+All a reviewer can do is set the criterion here and keep repeating it:
+
+What adds primitives extends. What adds finished goods replaces. The former enriches the mother tongue. The latter lets it die.
+
+And this honest, competent, one-chapter-short primer stands on the other side of that criterion — not because it did anything wrong, but because it did everything right except ask why.
+
+NOTES & VERIFICATION STATEMENT
+Publicly checkable modding and technical history
+(Editors may confirm against standard sources.)
+
+BuildCraft (SpaceToad, from 2011): pipe logistics, the quarry, MJ power, the Assembly Table and Gates (condition/action programming); fluid measurement in millibuckets (mB), later a Forge-wide convention.
+Founding-era authorship and core mechanics — IndustrialCraft (Alblaka), Forestry (SirSengir), Railcraft (CovertJaguar), Factorization (neptunepink), Twilight Forest (Benimatic), Thaumcraft (Azanor), Tinkers' Construct (SlimeKnights), Applied Energistics (AlgorithmX2), Thermal Expansion (TeamCoFH), GregTech (GregoriusT), Create (simibubi), Botania (Vazkii), TerraFirmaCraft, Better Than Wolves (FlowerChild) — community-standard knowledge.
+NEI (chickenbones) → JEI (mezz) as the item/recipe lookup lineage; WAILA / HWYLA / The One Probe as the tooltip lineage.
+Forge registries, event bus, Capabilities; Fabric's thin core plus SpongePowered Mixin; NeoForge forked from Forge in 2023; Quilt forked from Fabric.
+MCP and Yarn community mappings; Mojang began publishing official obfuscation maps in 2019.
+Version fracture points: 1.8 blockstates/model JSON; 1.13 "the Flattening" + datapacks; 1.16 Nether Update; 1.18 world height −64…320 and terrain rewrite; ~1.20.5 item components replacing NBT; 1.21 the Crafter.
+GregTech: New Horizons as a 1.7.10-based mega expert pack; SevTech: Ages and RLCraft as progression-reordering designs.
+Bukkit/Spigot/Paper plugin lineage vs. Forge/Fabric mod lineage; hybrid-server compatibility disputes.
+Java's free/open modding ethic vs. Bedrock's official paid marketplace; the Mojang EULA's commercialisation restrictions and their contested revisions.
+Pistons and horses as vanilla mechanisms with modded antecedents — widely recounted in the community; verify primary sources before fixing the strength of the claim. Flagged in §VIII.
+Verification Statement — editorial pass required
+Bibliographic record. The authors' association with ThoughtSTEM and LearnToMod is checkable. The English original is believed to be Minecraft Modding For Kids For Dummies (Wiley); the Chinese edition's full title, translator, year, ISBN and series must be taken from the copyright page. This edition deliberately does not reproduce specific badge names or the project list, to avoid unverifiable detail. The English↔Chinese edition correspondence is marked "to be confirmed."
+Struck sources. The dated blog posts, short-video items and encyclopedia entries cited in the first Chinese draft, together with specific Bamboo-mod recipes and drop values, remain removed for non-verifiability. §III therefore argues from the general design tendencies of decoration-type mods, bound to no specific numbers. If the house requires a concrete case, please supply verifiable mod documentation or in-game captures.
+Better Than Wolves. Its version-parking and its author's criticism of official design direction are long-standing community record. Verify the original forum posts before quoting directly. This edition uses no direct quotation.
+Chinese-platform material (§VII.4) is presented as structural description, not as sourced reporting. If the house wants it evidentiary, it needs its own sourcing pass.
+
+
+APPENDIX I — Rating Panel (if the house permits)
+Dimension	Assessment	Rating
+Effectiveness as programming initiation	Low floor, fast loop, strong empowerment	★★★★★
+Technical accuracy & currency	Tied to a specific online environment; distant from mainstream Forge/Fabric workflow	★★★☆☆
+Design self-awareness / reflection on vanilla-ness	Essentially absent; a structural blank	★★☆☆☆
+Value as a specimen for rift studies	Very high; the symptom is legible	★★★★★
+Overall (as a teaching text)	A competent tool manual that has not become a textbook	★★★★☆
+APPENDIX II — Pull Quotes (for cover band / extract column)
+"This book is a symptom of the rift, not a diagnosis of it."
+"The player's understanding of a mod is completed through a lookup interface, not through play."
+"To let mods extend the game more freely, the framework must first format the game."
+"Players of the same game live in different geological periods, and cannot intermarry."
+"The dialect did not return to the mother tongue. The mother tongue learned the dialect's rhetoric."
+"Shortening operations is a kindness. Shortening experience is an injury."
+"The rift was not manufactured by malice. It is a default setting of the education system."
+"The catalogue is thick, prosperous, productive. But there is no evening in a catalogue."
+APPENDIX III — Glossary (for marginal notes)
+Vanilla-ness — not "less content," but the grammatical property: few primitives, large combinatorial space, knowledge endogenous to play.
+Primitive — a small, orthogonal, infinitely combinable unit of rule.
+Finished good — content with payoff and usage pre-encapsulated; requires equipping, not understanding.
+Knowledge externalisation — understanding game content requires documentation or a lookup interface outside the game.
+Version stratigraphy — mutually incompatible time-layers formed in the modding ecosystem by version fracture.
+Loader politics — technical divergence sedimenting into communal identity opposition.
