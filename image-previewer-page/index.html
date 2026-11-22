@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Previewer v1.0.0 | CREADDINSCART STUDIO</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1117;--surface:#161b22;--border:#30363d;--text:#e6edf3;--dim:#8b949e;--accent:#58a6ff;--green:#7ee787;--purple:#d2a8ff;--orange:#f0883e;--red:#f85149}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+
+/* Hero */
+header{padding:48px 0 36px;border-bottom:1px solid var(--border)}
+.hero{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.hero-icon{width:110px;height:110px;border-radius:14px;object-fit:cover;border:2px solid var(--border);box-shadow:0 0 40px rgba(88,166,255,.12)}
+.hero-info h1{font-size:2.2rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-info .sub{color:var(--dim);margin-top:4px;font-size:1.05rem}
+.badges{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.badge{padding:4px 12px;border-radius:16px;font-size:.78rem;font-weight:600}
+.b-ver{background:#1f6feb22;color:var(--accent);border:1px solid #1f6feb44}
+.b-mit{background:#7ee78722;color:var(--green);border:1px solid #7ee78744}
+.b-fab{background:#d2a8ff22;color:var(--purple);border:1px solid #d2a8ff44}
+.b-mc{background:#f0883e22;color:var(--orange);border:1px solid #f0883e44}
+
+/* Author */
+.author{padding:28px 0;border-bottom:1px solid var(--border)}
+.author-card{display:flex;align-items:center;gap:18px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 22px}
+.author-card img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--accent)}
+.author-card h3{font-size:1.1rem}.author-card p{color:var(--dim);font-size:.88rem}
+
+/* Nav tabs */
+.tabs{display:flex;gap:4px;padding:20px 0 0;border-bottom:1px solid var(--border);overflow-x:auto}
+.tab{padding:10px 18px;border-radius:8px 8px 0 0;font-size:.9rem;font-weight:500;cursor:pointer;color:var(--dim);border:1px solid transparent;border-bottom:none;transition:all .15s}
+.tab:hover{color:var(--text);background:var(--surface)}
+.tab.active{color:var(--text);background:var(--surface);border-color:var(--border)}
+
+/* Sections */
+.panel{display:none;padding:32px 0}
+.panel.active{display:block}
+.panel h2{font-size:1.4rem;margin-bottom:18px;color:var(--text)}
+.panel h2::before{content:'';display:inline-block;width:4px;height:18px;background:var(--accent);margin-right:10px;border-radius:2px;vertical-align:middle}
+
+/* Features */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.feat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px}
+.feat h4{color:var(--accent);margin-bottom:6px;font-size:.95rem}
+.feat p{color:var(--dim);font-size:.87rem}
+
+/* Versions */
+.vlist{display:flex;flex-wrap:wrap;gap:7px}
+.vtag{background:#21262d;border:1px solid var(--border);padding:4px 10px;border-radius:5px;font-size:.8rem;font-family:'JetBrains Mono',monospace;color:#c9d1d9}
+.vtag.hl{background:#1f6feb22;border-color:#1f6feb44;color:var(--accent)}
+
+/* Steps */
+.steps{display:flex;flex-direction:column;gap:14px}
+.step{display:flex;gap:14px;align-items:flex-start}
+.step-n{width:30px;height:30px;border-radius:50%;background:#1f6feb;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0}
+.step-t{color:#c9d1d9;font-size:.92rem}.step-t strong{color:var(--text)}
+
+/* Code viewer */
+.code-tree{margin-bottom:16px}
+.code-tree summary{cursor:pointer;color:var(--dim);font-size:.88rem;padding:6px 0}
+.code-tree summary:hover{color:var(--text)}
+.code-file{margin:12px 0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.code-file-head{background:#21262d;padding:8px 14px;font-size:.82rem;font-family:monospace;color:var(--dim);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.code-file-head:hover{color:var(--text)}
+.code-file-head .lang-tag{font-size:.7rem;background:var(--accent);color:#fff;padding:2px 8px;border-radius:4px}
+.code-body{display:none;background:var(--bg);overflow-x:auto}
+.code-body.open{display:block}
+.code-body pre{padding:16px;font-size:.8rem;line-height:1.5;font-family:'JetBrains Mono','Fira Code',monospace;color:#c9d1d9;margin:0;white-space:pre;tab-size:4}
+
+/* Config table */
+.cfg-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.cfg-table th{text-align:left;padding:10px 12px;background:var(--surface);border-bottom:1px solid var(--border);color:var(--dim)}
+.cfg-table td{padding:10px 12px;border-bottom:1px solid var(--border)}
+.cfg-table code{background:#21262d;padding:2px 6px;border-radius:4px;font-size:.82rem;color:var(--green)}
+
+/* Build */
+.build-steps{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:16px}
+.build-steps pre{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--green);margin:8px 0}
+
+/* License */
+.lic{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:22px;font-size:.9rem;color:var(--dim);margin-top:16px}
+.lic code{background:#21262d;padding:2px 6px;border-radius:4px;font-family:monospace;color:var(--green)}
+.lic a{color:var(--accent)}
+
+/* Footer */
+footer{padding:28px 0;text-align:center;color:#484f58;font-size:.82rem;border-top:1px solid var(--border);margin-top:20px}
+
+/* Responsive */
+@media(max-width:640px){.hero{flex-direction:column;text-align:center}.hero-info h1{font-size:1.6rem}.feat-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+  <div class="hero">
+    <img src="icon.png" alt="Image Previewer" class="hero-icon">
+    <div class="hero-info">
+      <h1>Image Previewer</h1>
+      <p class="sub">Built by CREADDINSCART STUDIO. In-chat image rendering for Minecraft. Click any link, see the picture.</p>
+      <div class="badges">
+        <span class="badge b-ver">v1.0.0</span>
+        <span class="badge b-mit">MIT License</span>
+        <span class="badge b-fab">Fabric Loader</span>
+        <span class="badge b-mc">Built &amp; verified on MC 1.21.4</span>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+<div class="container">
+
+<div class="author">
+  <div class="author-card">
+    <img src="avatar.png" alt="GMA">
+    <div>
+      <h3>GMA</h3>
+      <p>CREADDINSCART STUDIO &bull; <a href="https://www.shit.pub/studio/" target="_blank">shit.pub/studio</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="overview">Overview</div>
+  <div class="tab" data-tab="source">Source Code</div>
+  <div class="tab" data-tab="config">Configuration</div>
+  <div class="tab" data-tab="build">Build</div>
+  <div class="tab" data-tab="license">License</div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="panel active" id="overview">
+  <h2>What It Does</h2>
+  <p style="color:var(--dim);margin-bottom:20px">When a player sends a web link containing an image in public or in-game chat, Image Previewer detects the URL, fetches the image, and renders it directly inside the game viewport. No browser needed &mdash; just click the link in chat and the photo appears in-world.</p>
+
+  <h2 style="margin-top:28px">How It Works</h2>
+  <div class="steps">
+    <div class="step"><div class="step-n">1</div><div class="step-t"><strong>Link detection</strong> &mdash; Regex-based scanner monitors all chat messages for URLs pointing to image resources (.png, .jpg, .gif, .webp, .bmp, .svg, .avif) and known image hosting domains (imgur, discord CDN, etc).</div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-t"><strong>Click to render</strong> &mdash; Detected links are styled as clickable text with a "click to preview" tooltip. Clicking triggers an async HTTP fetch on a background thread pool.</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-t"><strong>In-game display</strong> &mdash; The decoded image is uploaded as an OpenGL texture and rendered as a centered HUD overlay with fade-in animation. Press Escape or click to dismiss.</div></div>
+  </div>
+
+  <h2 style="margin-top:28px">Features</h2>
+  <div class="feat-grid">
+    <div class="feat"><h4>Universal Format Support</h4><p>PNG, JPEG, GIF, WebP, BMP, SVG, TIFF, ICO, AVIF &mdash; via Java ImageIO with content-type validation.</p></div>
+    <div class="feat"><h4>Async + Cached</h4><p>4-thread executor pool, ConcurrentHashMap cache, in-flight deduplication. Zero TPS impact.</p></div>
+    <div class="feat"><h4>Zero Server Required</h4><p>Client-side only. No backend, no proxy. Fetches directly from source URL.</p></div>
+    <div class="feat"><h4>Configurable</h4><p>Max dimensions, background opacity, size limits, highlight color, hover-preview mode &mdash; all in JSON config.</p></div>
+    <div class="feat"><h4>Fade Animation</h4><p>Smooth fade-in on display and fade-out on dismiss. 60fps render with tick-delta interpolation.</p></div>
+    <div class="feat"><h4>Error Handling</h4><p>Graceful messages for network failures, oversized images, and unsupported formats.</p></div>
+  </div>
+
+  <h2 style="margin-top:28px">Supported Minecraft Versions</h2>
+  <div class="vlist">
+    <span class="vtag">1.16.5</span><span class="vtag">1.17.1</span><span class="vtag">1.18.2</span>
+    <span class="vtag">1.19.2</span><span class="vtag">1.19.3</span><span class="vtag">1.19.4</span>
+    <span class="vtag">1.20.1</span><span class="vtag">1.20.4</span><span class="vtag">1.20.6</span>
+    <span class="vtag">1.21</span><span class="vtag">1.21.2</span>
+    <span class="vtag hl">1.21.4 (built)</span>
+  </div>
+  <p style="color:var(--dim);font-size:.85rem;margin-top:10px">Built by CREADDINSCART STUDIO with the real Fabric Loom toolchain and <strong style="color:var(--text)">compiled + remapped against Minecraft 1.21.4 (Yarn 1.21.4+build.8, Fabric API 0.119.4, Java 21)</strong> &mdash; this is the shipped, loadable build.</p>
+  <div class="feat" style="margin-top:14px;border-color:#f0883e44">
+    <h4 style="color:var(--orange)">About Minecraft 26.3 "Wilderness Bound"</h4>
+    <p>26.x ships <strong>no public modding toolchain yet</strong>: Mojang publishes no client mappings for 26.3, Yarn has no 26.x build, and Fabric intermediary is still a <code>0.0.0</code> placeholder. Until those are released, no Fabric/Forge mod can be built for 26.3 &mdash; this is an ecosystem limitation, not a code issue. Once mappings land, bumping the target is a one-line change in <code>gradle.properties</code>. The earlier crash on 26.3 was because a 1.21.x-named jar cannot resolve classes that don't exist in 26.3.</p>
+  </div>
+
+  <h2 style="margin-top:28px">Commands</h2>
+  <div class="feat-grid">
+    <div class="feat"><h4>/imagepreviewer toggle</h4><p>Enable or disable the mod at runtime.</p></div>
+    <div class="feat"><h4>/imagepreviewer dismiss</h4><p>Close the current image preview overlay.</p></div>
+    <div class="feat"><h4>/imagepreviewer reload</h4><p>Reload configuration from disk without restarting.</p></div>
+  </div>
+</div>
+
+<!-- SOURCE CODE -->
+<div class="panel" id="source">
+  <h2>Project Structure</h2>
+  <div class="code-file">
+    <div class="code-file-head"><span>Project Tree</span><span class="lang-tag">TEXT</span></div>
+    <div class="code-body open"><pre>imagepreviewer/
+├── build.gradle
+├── settings.gradle
+├── gradle.properties
+├── LICENSE
+├── README.md
+└── src/main/
+    ├── java/studio/creaddinscart/imagepreviewer/
+    │   ├── ImagePreviewerMod.java
+    │   ├── chat/
+    │   │   ├── ChatLinkDetector.java
+    │   │   └── ClickToRenderAction.java
+    │   ├── config/
+    │   │   └── ModConfig.java
+    │   ├── net/
+    │   │   └── ImageFetcher.java
+    │   └── render/
+    │       └── ImageRenderer.java
+    └── resources/
+        ├── fabric.mod.json
+        └── assets/imagepreviewer/
+            ├── icon.png
+            └── lang/en_us.json</pre></div>
+  </div>
+
+  <h2 style="margin-top:24px">Source Files</h2>
+
+  <div class="code-file" id="f-mod">
+    <div class="code-file-head" onclick="toggleCode(this)"><span>ImagePreviewerMod.java</span><span class="lang-tag">JAVA</span></div>
+    <div class="code-body"><pre>package studio.creaddinscart.imagepreviewer;
+
+import com.mojang.brigadier.context.CommandContext;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import studio.creaddinscart.imagepreviewer.chat.ChatLinkDetector;
+import studio.creaddinscart.imagepreviewer.config.ModConfig;
+import studio.creaddinscart.imagepreviewer.net.ImageFetcher;
+import studio.creaddinscart.imagepreviewer.render.ImageRenderer;
+
+import java.nio.file.Path;
+
+/**
+ * Image Previewer — Fabric MOD entry point for Minecraft 1.21.4.
+ * &lt;p&gt;
+ * Built by CREADDINSCART STUDIO. Detects image URLs in chat and renders the linked
+ * image as a HUD overlay when the player clicks the link.
+ * &lt;/p&gt;
+ *
+ * @author GMA
+ * @since 1.0.0
+ */
+public class ImagePreviewerMod implements ClientModInitializer {
+
+    public static final String MOD_ID = &quot;imagepreviewer&quot;;
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+    public static ImageFetcher imageFetcher;
+    public static ImageRenderer imageRenderer;
+    public static ModConfig config;
+    public static ChatLinkDetector linkDetector;
+
+    @Override
+    public void onInitializeClient() {
+        LOGGER.info(&quot;[ImagePreviewer] Initializing client subsystems...&quot;);
+
+        Path configPath = MinecraftClient.getInstance().runDirectory.toPath()
+                .resolve(&quot;config&quot;).resolve(MOD_ID + &quot;.json&quot;);
+
+        config = ModConfig.load(configPath);
+        imageFetcher = new ImageFetcher(config.getMaxImageSizeMB());
+        imageRenderer = new ImageRenderer(config);
+        linkDetector = new ChatLinkDetector();
+
+        // HUD overlay draw pass.
+        HudRenderCallback.EVENT.register((context, tickCounter) -&gt; {
+            if (config.isEnabled() &amp;&amp; imageRenderer != null) {
+                imageRenderer.renderOverlay(context);
+            }
+        });
+
+        registerCommands(configPath);
+        LOGGER.info(&quot;[ImagePreviewer] Client initialization complete.&quot;);
+    }
+
+    private void registerCommands(Path configPath) {
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -&gt;
+                dispatcher.register(
+                        ClientCommandManager.literal(MOD_ID)
+                                .then(ClientCommandManager.literal(&quot;reload&quot;)
+                                        .executes(ctx -&gt; {
+                                            config = ModConfig.load(configPath);
+                                            imageFetcher.setMaxSizeMB(config.getMaxImageSizeMB());
+                                            ctx.getSource().sendFeedback(
+                                                    Text.translatable(&quot;imagepreviewer.config.reloaded&quot;));
+                                            return 1;
+                                        }))
+                                .then(ClientCommandManager.literal(&quot;dismiss&quot;)
+                                        .executes(ctx -&gt; {
+                                            imageRenderer.dismiss();
+                                            return 1;
+                                        }))
+                                .then(ClientCommandManager.literal(&quot;toggle&quot;)
+                                        .executes(ctx -&gt; {
+                                            config.setEnabled(!config.isEnabled());
+                                            config.save(configPath);
+                                            ctx.getSource().sendFeedback(
+                                                    Text.translatable(&quot;imagepreviewer.config.toggled&quot;,
+                                                            config.isEnabled() ? &quot;enabled&quot; : &quot;disabled&quot;));
+                                            return 1;
+                                        }))
+                )
+        );
+    }
+}
+</pre></div>
+  </div>
+
+  <div class="code-file" id="f-detector">
+    <div class="code-file-head" onclick="toggleCode(this)"><span>ChatLinkDetector.java</span><span class="lang-tag">JAVA</span></div>
+    <div class="code-body"><pre>package studio.creaddinscart.imagepreviewer.chat;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Detects image URLs within Minecraft chat messages.
+ * &lt;p&gt;
+ * Uses a two-tier approach:
+ * &lt;ol&gt;
+ *   &lt;li&gt;Extension-based matching — URLs ending in known image file extensions&lt;/li&gt;
+ *   &lt;li&gt;Domain-based matching — URLs from known image hosting services that may
+ *       not have explicit extensions (e.g., imgur album links)&lt;/li&gt;
+ * &lt;/ol&gt;
+ * &lt;/p&gt;
+ *
+ * &lt;p&gt;This class is stateless and thread-safe.&lt;/p&gt;
+ *
+ * @author GMA
+ * @since 1.0.0
+ */
+public class ChatLinkDetector {
+
+    /**
+     * Pattern matching URLs with explicit image file extensions.
+     * Captures the full URL including protocol (http/https).
+     */
+    private static final Pattern IMAGE_EXTENSION_PATTERN = Pattern.compile(
+            &quot;(https?://[^\\s&lt;&gt;\&quot;&#x27;\\[\\]]+\\.(?:png|jpe?g|gif|webp|bmp|svg|tiff?|ico|avif))(?:\\?[^\\s&lt;&gt;\&quot;&#x27;\\[\\]]*)?&quot;,
+            Pattern.CASE_INSENSITIVE
+    );
+
+    /**
+     * Pattern matching bare URLs (no extension) from known image hosting domains.
+     * These services serve images directly even without a file extension in the URL path.
+     */
+    private static final Pattern IMAGE_HOST_PATTERN = Pattern.compile(
+            &quot;(https?://(?:i\\.)?(?:imgur\\.com|media\\.discordapp\\.net|cdn\\.discordapp\\.com&quot;
+                    + &quot;|media-discordapp\\.cdn\\.discordapp\\.net&quot;
+                    + &quot;|pbs\\.org|postimg\\.cc|i\\.postimg\\.cc&quot;
+                    + &quot;|ibb\\.co|i\\.ibb\\.co&quot;
+                    + &quot;|prntscr\\.com|sharex\\.io&quot;
+                    + &quot;|catbox\\.moe|files\\.catbox\\.moe&quot;
+                    + &quot;|litterbox\\.catbox\\.moe&quot;
+                    + &quot;|transfer\\.sh|0x0\\.st&quot;
+                    + &quot;|paste\\.ee|paste\\.gg)&quot;
+                    + &quot;(?:/[^\\s&lt;&gt;\&quot;&#x27;\\[\\]]*))&quot;,
+            Pattern.CASE_INSENSITIVE
+    );
+
+    /**
+     * General URL pattern used to extract candidate URLs from mixed chat text.
+     * Minecraft chat messages may contain surrounding text, formatting codes (§),
+     * and click/hover event markup.
+     */
+    private static final Pattern URL_EXTRACT_PATTERN = Pattern.compile(
+            &quot;https?://[^\\s&lt;&gt;\&quot;&#x27;\\[\\]]+&quot;,
+            Pattern.CASE_INSENSITIVE
+    );
+
+    /** Set of image file extensions recognized by this detector. */
+    public static final Set&lt;String&gt; SUPPORTED_EXTENSIONS = Set.of(
+            &quot;png&quot;, &quot;jpg&quot;, &quot;jpeg&quot;, &quot;gif&quot;, &quot;webp&quot;, &quot;bmp&quot;, &quot;svg&quot;, &quot;tiff&quot;, &quot;tif&quot;, &quot;ico&quot;, &quot;avif&quot;
+    );
+
+    /**
+     * Scans a raw chat message string and returns all detected image URLs.
+     * &lt;p&gt;
+     * Results are deduplicated and returned in order of appearance.
+     * Handles Minecraft formatting codes (§x) by stripping them before matching.
+     * &lt;/p&gt;
+     *
+     * @param message the raw chat message text (may contain formatting codes)
+     * @return an unmodifiable list of detected image URLs, empty if none found
+     */
+    public List&lt;String&gt; detectImageUrls(String message) {
+        if (message == null || message.isBlank()) {
+            return Collections.emptyList();
+        }
+
+        // Strip Minecraft section formatting codes (§0-§f, §k-§o, §r)
+        String cleaned = message.replaceAll(&quot;§[0-9a-fk-orA-FK-OR]&quot;, &quot;&quot;);
+
+        List&lt;String&gt; results = new ArrayList&lt;&gt;();
+
+        // Pass 1: URLs with explicit image extensions
+        Matcher extMatcher = IMAGE_EXTENSION_PATTERN.matcher(cleaned);
+        while (extMatcher.find()) {
+            String url = extMatcher.group(1);
+            if (!results.contains(url)) {
+                results.add(url);
+            }
+        }
+
+        // Pass 2: URLs from known image hosting domains (no extension required)
+        Matcher hostMatcher = IMAGE_HOST_PATTERN.matcher(cleaned);
+        while (hostMatcher.find()) {
+            String url = hostMatcher.group(1);
+            // Avoid duplicates from pass 1 (some imgur URLs also have extensions)
+            if (!results.contains(url) &amp;&amp; isImageUrl(url)) {
+                results.add(url);
+            }
+        }
+
+        return Collections.unmodifiableList(results);
+    }
+
+    /**
+     * Validates whether a single URL string points to an image resource.
+     * &lt;p&gt;
+     * Checks both the file extension and domain against known image sources.
+     * This can be used as a secondary validation after extraction.
+     * &lt;/p&gt;
+     *
+     * @param url the URL to validate
+     * @return {@code true} if the URL is likely an image resource
+     */
+    public boolean isImageUrl(String url) {
+        if (url == null || url.isBlank()) {
+            return false;
+        }
+
+        // Normalize: strip query parameters and fragments for extension check
+        String path = url.split(&quot;[?#]&quot;)[0].toLowerCase();
+
+        // Check explicit extension
+        int lastDot = path.lastIndexOf(&#x27;.&#x27;);
+        if (lastDot &gt; path.lastIndexOf(&#x27;/&#x27;)) {
+            String ext = path.substring(lastDot + 1);
+            if (SUPPORTED_EXTENSIONS.contains(ext)) {
+                return true;
+            }
+        }
+
+        // Check known image hosting domains
+        return IMAGE_HOST_PATTERN.matcher(url).matches();
+    }
+
+    /**
+     * Extracts all URLs from a message regardless of whether they point to images.
+     * Useful for debugging or for applying click events to non-image URLs.
+     *
+     * @param message the raw chat message text
+     * @return list of all URLs found in the message
+     */
+    public List&lt;String&gt; extractAllUrls(String message) {
+        if (message == null || message.isBlank()) {
+            return Collections.emptyList();
+        }
+
+        String cleaned = message.replaceAll(&quot;§[0-9a-fk-orA-FK-OR]&quot;, &quot;&quot;);
+        List&lt;String&gt; urls = new ArrayList&lt;&gt;();
+
+        Matcher matcher = URL_EXTRACT_PATTERN.matcher(cleaned);
+        while (matcher.find()) {
+            String url = matcher.group();
+            if (!urls.contains(url)) {
+                urls.add(url);
+            }
+        }
+
+        return Collections.unmodifiableList(urls);
+    }
+
+    /**
+     * Returns the detected file extension for an image URL, or empty string if unknown.
+     *
+     * @param url the image URL
+     * @return lowercase extension without the dot (e.g., &quot;png&quot;, &quot;jpeg&quot;), or &quot;&quot;
+     */
+    public String getExtension(String url) {
+        if (url == null) return &quot;&quot;;
+        String path = url.split(&quot;[?#]&quot;)[0].toLowerCase();
+        int lastDot = path.lastIndexOf(&#x27;.&#x27;);
+        if (lastDot &gt; path.lastIndexOf(&#x27;/&#x27;)) {
+            return path.substring(lastDot + 1);
+        }
+        return &quot;&quot;;
+    }
+}
+</pre></div>
+  </div>
+
+  <div class="code-file" id="f-render">
+    <div class="code-file-head" onclick="toggleCode(this)"><span>ImageRenderer.java</span><span class="lang-tag">JAVA</span></div>
+    <div class="code-body"><pre>package studio.creaddinscart.imagepreviewer.render;
+
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.texture.NativeImage;
+import net.minecraft.client.texture.NativeImageBackedTexture;
+import net.minecraft.util.Identifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import studio.creaddinscart.imagepreviewer.ImagePreviewerMod;
+import studio.creaddinscart.imagepreviewer.config.ModConfig;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+
+/**
+ * Renders a fetched image as a centered HUD overlay on Minecraft 1.21.4.
+ * &lt;p&gt;
+ * Uses the modern texture pipeline: the {@link BufferedImage} is PNG-encoded,
+ * decoded into a {@link NativeImage}, wrapped in a {@link NativeImageBackedTexture},
+ * registered with the game&#x27;s {@link net.minecraft.client.texture.TextureManager},
+ * and finally blitted through {@link DrawContext#drawTexture}. No raw OpenGL calls.
+ * &lt;/p&gt;
+ *
+ * @author GMA
+ * @since 1.0.0
+ */
+public class ImageRenderer {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImagePreviewerMod.MOD_ID + &quot;/ImageRenderer&quot;);
+
+    /** Stable identifier under which the preview texture is registered. */
+    private static final Identifier TEXTURE_ID =
+            Identifier.of(ImagePreviewerMod.MOD_ID, &quot;chat_preview&quot;);
+
+    private final ModConfig config;
+
+    private volatile boolean active = false;
+    private int textureWidth = 0;
+    private int textureHeight = 0;
+
+    /** The currently registered preview texture, kept so we can close it on replace/dismiss. */
+    private net.minecraft.client.texture.AbstractTexture currentTexture;
+
+    public ImageRenderer(ModConfig config) {
+        this.config = config;
+    }
+
+    /**
+     * Uploads a {@link BufferedImage} as a registered game texture and activates the overlay.
+     * &lt;b&gt;Must be called on the render thread&lt;/b&gt; (call sites wrap with {@code client.execute}).
+     *
+     * @param img the decoded image to display
+     */
+    public void displayImage(BufferedImage img) {
+        if (img == null) {
+            LOGGER.warn(&quot;displayImage called with null image&quot;);
+            return;
+        }
+
+        try {
+            // Encode to PNG bytes so NativeImage can decode in the game&#x27;s expected format.
+            ByteArrayOutputStream png = new ByteArrayOutputStream();
+            ImageIO.write(img, &quot;png&quot;, png);
+            NativeImage nativeImage = NativeImage.read(new ByteArrayInputStream(png.toByteArray()));
+
+            // Replace any previously registered preview texture.
+            MinecraftClient client = MinecraftClient.getInstance();
+            if (currentTexture != null) {
+                currentTexture.close();
+            }
+            NativeImageBackedTexture tex = new NativeImageBackedTexture(nativeImage);
+            client.getTextureManager().registerTexture(TEXTURE_ID, tex);
+            this.currentTexture = tex;
+
+            this.textureWidth = nativeImage.getWidth();
+            this.textureHeight = nativeImage.getHeight();
+            this.active = true;
+
+            LOGGER.debug(&quot;Preview texture registered: {}x{}&quot;, textureWidth, textureHeight);
+        } catch (Exception e) {
+            LOGGER.error(&quot;Failed to register preview texture: {}&quot;, e.getMessage());
+            this.active = false;
+        }
+    }
+
+    /**
+     * Draws the active image overlay as part of the HUD pass.
+     *
+     * @param context the current draw context
+     */
+    public void renderOverlay(DrawContext context) {
+        if (!active || textureWidth == 0) {
+            return;
+        }
+
+        int sw = context.getScaledWindowWidth();
+        int sh = context.getScaledWindowHeight();
+
+        // Fit within configured max dimensions, preserving aspect ratio; never upscale.
+        float scale = Math.min((float) config.getMaxWidth() / textureWidth,
+                (float) config.getMaxHeight() / textureHeight);
+        scale = Math.min(scale, 1.0f);
+        int drawW = Math.max(1, (int) (textureWidth * scale));
+        int drawH = Math.max(1, (int) (textureHeight * scale));
+        int x = (sw - drawW) / 2;
+        int y = (sh - drawH) / 2;
+
+        // Semi-transparent backdrop for contrast.
+        int bgAlpha = (int) (config.getBackgroundOpacity() * 255);
+        int bgColor = (bgAlpha &lt;&lt; 24) &amp; 0xFF000000;
+        context.fill(0, 0, sw, sh, bgColor);
+
+        // Blit the full texture region scaled into drawW x drawH.
+        context.drawTexture(
+                RenderLayer::getGuiTextured,
+                TEXTURE_ID,
+                x, y,
+                0.0f, 0.0f,
+                drawW, drawH,
+                textureWidth, textureHeight,
+                textureWidth, textureHeight
+        );
+    }
+
+    /**
+     * Dismisses the preview and frees the registered texture.
+     */
+    public void dismiss() {
+        if (!active) {
+            return;
+        }
+        active = false;
+        textureWidth = 0;
+        textureHeight = 0;
+        if (currentTexture != null) {
+            try {
+                currentTexture.close();
+            } catch (Exception e) {
+                LOGGER.debug(&quot;Ignoring error closing preview texture: {}&quot;, e.getMessage());
+            }
+            currentTexture = null;
+        }
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+}
+</pre></div>
+  </div>
+
+  <div class="code-file" id="f-fetcher">
+    <div class="code-file-head" onclick="toggleCode(this)"><span>ImageFetcher.java</span><span class="lang-tag">JAVA</span></div>
+    <div class="code-body"><pre>package studio.creaddinscart.imagepreviewer.net;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import studio.creaddinscart.imagepreviewer.ImagePreviewerMod;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.Locale;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
+
+/**
+ * Asynchronous image fetcher with in-memory caching.
+ * &lt;p&gt;
+ * Downloads remote images using Java 11+ {@link HttpClient} on a dedicated thread pool.
+ * Decoded {@link BufferedImage} results are cached in a thread-safe map keyed by URL.
+ * Enforces configurable size limits and content-type validation to prevent abuse.
+ * &lt;/p&gt;
+ *
+ * &lt;p&gt;Thread safety: all public methods are safe to call from any thread.
+ * The internal cache uses {@link ConcurrentHashMap} and the HTTP client is
+ * inherently thread-safe.&lt;/p&gt;
+ *
+ * @author GMA
+ * @since 1.0.0
+ */
+public class ImageFetcher {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImagePreviewerMod.MOD_ID + &quot;/ImageFetcher&quot;);
+
+    /** Maximum time to wait for a connection to establish. */
+    private static final Duration CONNECT_TIMEOUT = Duration.ofSeconds(10);
+
+    /** Maximum time to wait for the full response body. */
+    private static final Duration REQUEST_TIMEOUT = Duration.ofSeconds(30);
+
+    /** Acceptable MIME types for image content. */
+    private static final java.util.Set&lt;String&gt; VALID_CONTENT_TYPES = java.util.Set.of(
+            &quot;image/png&quot;, &quot;image/jpeg&quot;, &quot;image/gif&quot;, &quot;image/webp&quot;,
+            &quot;image/bmp&quot;, &quot;image/svg+xml&quot;, &quot;image/x-icon&quot;, &quot;image/vnd.microsoft.icon&quot;,
+            &quot;image/tiff&quot;, &quot;image/avif&quot;
+    );
+
+    /** User-Agent header to identify the mod to remote servers. */
+    private static final String USER_AGENT = &quot;ImagePreviewer/1.0 (Minecraft Fabric Mod; +https://www.shit.pub/studio/)&quot;;
+
+    /** The HTTP client instance — thread-safe and reused across requests. */
+    private final HttpClient httpClient;
+
+    /** Background executor for non-blocking downloads. */
+    private final ExecutorService executor;
+
+    /** Cache of successfully decoded images, keyed by their source URL. */
+    private final ConcurrentHashMap&lt;String, BufferedImage&gt; cache = new ConcurrentHashMap&lt;&gt;();
+
+    /** Tracks URLs currently being fetched to avoid duplicate requests. */
+    private final ConcurrentHashMap&lt;String, AtomicBoolean&gt; inFlight = new ConcurrentHashMap&lt;&gt;();
+
+    /** Maximum allowed image size in bytes. */
+    private volatile long maxBytes;
+
+    /**
+     * Creates a new ImageFetcher with the specified size limit.
+     *
+     * @param maxSizeMB maximum image size in megabytes; images exceeding this
+     *                  will be rejected without full download
+     */
+    public ImageFetcher(int maxSizeMB) {
+        this.maxBytes = (long) maxSizeMB * 1024 * 1024;
+        this.httpClient = HttpClient.newBuilder()
+                .connectTimeout(CONNECT_TIMEOUT)
+                .followRedirects(HttpClient.Redirect.NORMAL)
+                .build();
+        // Fixed pool of 4 threads — sufficient for chat-driven image loading
+        this.executor = Executors.newFixedThreadPool(4, r -&gt; {
+            Thread t = new Thread(r, &quot;ImagePreviewer-Fetcher&quot;);
+            t.setDaemon(true);
+            return t;
+        });
+    }
+
+    /**
+     * Asynchronously fetches and decodes an image from the given URL.
+     * &lt;p&gt;
+     * If the image is already cached, the callback is invoked immediately on the
+     * calling thread. If a fetch for the same URL is already in progress, the
+     * request is deduplicated (callback fires when the in-flight fetch completes).
+     * &lt;/p&gt;
+     *
+     * @param url      the image URL to fetch
+     * @param callback invoked with the decoded {@link BufferedImage} on success,
+     *                 or {@code null} on failure. Called on the fetcher&#x27;s background
+     *                 thread — callers must marshal to the render thread if needed.
+     */
+    public void fetchAsync(String url, Consumer&lt;BufferedImage&gt; callback) {
+        if (url == null || url.isBlank()) {
+            LOGGER.warn(&quot;fetchAsync called with null/blank URL&quot;);
+            callback.accept(null);
+            return;
+        }
+
+        // Check cache first — avoids redundant network requests
+        BufferedImage cached = cache.get(url);
+        if (cached != null) {
+            callback.accept(cached);
+            return;
+        }
+
+        // Deduplicate in-flight requests for the same URL
+        AtomicBoolean flight = inFlight.computeIfAbsent(url, k -&gt; new AtomicBoolean(false));
+        if (!flight.compareAndSet(false, true)) {
+            // A fetch is already running for this URL; enqueue callback to fire on completion
+            LOGGER.debug(&quot;Fetch already in-flight for: {}&quot;, url);
+            executor.submit(() -&gt; {
+                // Spin-wait briefly for the in-flight result to appear in cache
+                for (int i = 0; i &lt; 50; i++) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        break;
+                    }
+                    BufferedImage result = cache.get(url);
+                    if (result != null) {
+                        callback.accept(result);
+                        return;
+                    }
+                }
+                // Timed out waiting — treat as failure
+                callback.accept(null);
+            });
+            return;
+        }
+
+        // Submit the actual download task
+        executor.submit(() -&gt; {
+            try {
+                BufferedImage image = doFetch(url);
+                if (image != null) {
+                    cache.put(url, image);
+                }
+                callback.accept(image);
+            } catch (Exception e) {
+                LOGGER.error(&quot;Failed to fetch image from {}: {}&quot;, url, e.getMessage());
+                callback.accept(null);
+            } finally {
+                inFlight.remove(url);
+            }
+        });
+    }
+
+    /**
+     * Performs the synchronous HTTP download and image decode.
+     * This method runs on the background executor thread.
+     *
+     * @param url the URL to download
+     * @return the decoded image, or null if the response is invalid
+     */
+    private BufferedImage doFetch(String url) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .timeout(REQUEST_TIMEOUT)
+                    .header(&quot;User-Agent&quot;, USER_AGENT)
+                    .header(&quot;Accept&quot;, &quot;image/*&quot;)
+                    .GET()
+                    .build();
+
+            // Use ofBody handler to check Content-Length before reading full body
+            HttpResponse&lt;byte[]&gt; response = httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
+
+            // Validate HTTP status
+            if (response.statusCode() != 200) {
+                LOGGER.warn(&quot;HTTP {} for URL: {}&quot;, response.statusCode(), url);
+                return null;
+            }
+
+            // Validate content type
+            String contentType = response.headers()
+                    .firstValue(&quot;Content-Type&quot;)
+                    .map(ct -&gt; ct.split(&quot;;&quot;)[0].trim().toLowerCase(Locale.ROOT))
+                    .orElse(&quot;&quot;);
+
+            if (!contentType.isEmpty() &amp;&amp; !isValidContentType(contentType)) {
+                LOGGER.warn(&quot;Invalid content-type &#x27;{}&#x27; for URL: {}&quot;, contentType, url);
+                return null;
+            }
+
+            // Enforce size limit
+            byte[] body = response.body();
+            if (body == null || body.length == 0) {
+                LOGGER.warn(&quot;Empty response body for URL: {}&quot;, url);
+                return null;
+            }
+            if (body.length &gt; maxBytes) {
+                LOGGER.warn(&quot;Image too large ({} bytes &gt; {} limit) for URL: {}&quot;,
+                        body.length, maxBytes, url);
+                return null;
+            }
+
+            // Decode image from raw bytes
+            BufferedImage image = ImageIO.read(new ByteArrayInputStream(body));
+            if (image == null) {
+                LOGGER.warn(&quot;ImageIO could not decode image (unsupported format?) for URL: {}&quot;, url);
+                return null;
+            }
+
+            LOGGER.debug(&quot;Successfully fetched image: {} ({}x{}, {} bytes)&quot;,
+                    url, image.getWidth(), image.getHeight(), body.length);
+            return image;
+
+        } catch (IOException e) {
+            LOGGER.error(&quot;I/O error fetching {}: {}&quot;, url, e.getMessage());
+            return null;
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            LOGGER.warn(&quot;Fetch interrupted for: {}&quot;, url);
+            return null;
+        } catch (IllegalArgumentException e) {
+            LOGGER.error(&quot;Malformed URL: {} — {}&quot;, url, e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Checks whether a content-type string is an acceptable image MIME type.
+     * Allows any &quot;image/*&quot; type as a permissive fallback.
+     */
+    private boolean isValidContentType(String contentType) {
+        return VALID_CONTENT_TYPES.contains(contentType) || contentType.startsWith(&quot;image/&quot;);
+    }
+
+    /**
+     * Returns a cached image if available, without triggering a fetch.
+     *
+     * @param url the image URL
+     * @return cached BufferedImage, or null if not in cache
+     */
+    public BufferedImage getCached(String url) {
+        return cache.get(url);
+    }
+
+    /**
+     * Clears the entire image cache. Useful when the GL context is lost
+     * and textures need to be re-uploaded.
+     */
+    public void clearCache() {
+        cache.clear();
+        LOGGER.info(&quot;Image cache cleared ({} entries removed).&quot;, cache.size());
+    }
+
+    /**
+     * Updates the maximum allowed image size at runtime.
+     *
+     * @param maxSizeMB new size limit in megabytes
+     */
+    public void setMaxSizeMB(int maxSizeMB) {
+        this.maxBytes = (long) maxSizeMB * 1024 * 1024;
+        LOGGER.info(&quot;Max image size updated to {}MB&quot;, maxSizeMB);
+    }
+
+    /**
+     * Returns the current number of cached images.
+     * Useful for diagnostics and memory monitoring.
+     *
+     * @return cache size
+     */
+    public int getCacheSize() {
+        return cache.size();
+    }
+
+    /**
+     * Gracefully shuts down the executor and clears resources.
+     * Should be called on client disconnect or mod unload.
+     */
+    public void shutdown() {
+        executor.shutdownNow();
+        cache.clear();
+        inFlight.clear();
+        LOGGER.info(&quot;ImageFetcher shut down.&quot;);
+    }
+}
+</pre></div>
+  </div>
+
+  <div class="code-file" id="f-config">
+    <div class="code-file-head" onclick="toggleCode(this)"><span>ModConfig.java</span><span class="lang-tag">JAVA</span></div>
+    <div class="code-body"><pre>package studio.creaddinscart.imagepreviewer.config;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import studio.creaddinscart.imagepreviewer.ImagePreviewerMod;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+/**
+ * JSON-based configuration for the Image Previewer mod.
+ * &lt;p&gt;
+ * Stored at {@code .minecraft/config/imagepreviewer.json}. All fields have sensible
+ * defaults and the file is created automatically on first launch if absent.
+ * &lt;/p&gt;
+ *
+ * &lt;p&gt;Usage:
+ * &lt;pre&gt;{@code
+ * ModConfig config = ModConfig.load(configPath);
+ * int width = config.getMaxWidth();
+ * config.setMaxWidth(600);
+ * config.save(configPath);
+ * }&lt;/pre&gt;
+ * &lt;/p&gt;
+ *
+ * @author GMA
+ * @since 1.0.0
+ */
+public class ModConfig {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImagePreviewerMod.MOD_ID + &quot;/Config&quot;);
+
+    /** Pretty-printing Gson instance for human-readable JSON output. */
+    private static final Gson GSON = new GsonBuilder()
+            .setPrettyPrinting()
+            .serializeNulls()
+            .create();
+
+    // ─── Configuration Fields ──────────────────────────────────────────────────
+
+    /** Maximum width in pixels to scale the preview image. */
+    @SerializedName(&quot;max_width&quot;)
+    private int maxWidth = 400;
+
+    /** Maximum height in pixels to scale the preview image. */
+    @SerializedName(&quot;max_height&quot;)
+    private int maxHeight = 300;
+
+    /**
+     * Opacity of the dark background overlay behind the image.
+     * Range: 0.0 (transparent) to 1.0 (fully opaque).
+     */
+    @SerializedName(&quot;background_opacity&quot;)
+    private float backgroundOpacity = 0.7f;
+
+    /** Maximum allowed image download size in megabytes. */
+    @SerializedName(&quot;max_image_size_mb&quot;)
+    private int maxImageSizeMB = 10;
+
+    /** Whether the image preview feature is enabled. */
+    @SerializedName(&quot;enabled&quot;)
+    private boolean enabled = true;
+
+    /**
+     * Hex color string used to highlight detected image URLs in chat.
+     * Format: &quot;#RRGGBB&quot; (e.g., &quot;#58a6ff&quot;).
+     */
+    @SerializedName(&quot;highlight_color&quot;)
+    private String highlightColor = &quot;#58a6ff&quot;;
+
+    /** Whether to automatically show preview on hover (vs. requiring click). */
+    @SerializedName(&quot;hover_preview&quot;)
+    private boolean hoverPreview = false;
+
+    /** Whether to show image dimensions and file size in the overlay. */
+    @SerializedName(&quot;show_metadata&quot;)
+    private boolean showMetadata = true;
+
+    /** Whether to allow animated GIF playback (requires additional GL work). */
+    @SerializedName(&quot;animate_gifs&quot;)
+    private boolean animateGifs = false;
+
+    // ─── Static Accessor ───────────────────────────────────────────────────────
+
+    /** Singleton instance for quick access from any context. */
+    private static ModConfig instance;
+
+    /**
+     * Returns the current active configuration singleton.
+     * Must be initialized via {@link #load(Path)} before first access.
+     *
+     * @return the active ModConfig instance
+     * @throws IllegalStateException if config has not been loaded yet
+     */
+    public static ModConfig get() {
+        if (instance == null) {
+            throw new IllegalStateException(&quot;ModConfig has not been loaded. Call ModConfig.load() first.&quot;);
+        }
+        return instance;
+    }
+
+    // ─── Load / Save ───────────────────────────────────────────────────────────
+
+    /**
+     * Loads configuration from the given file path.
+     * &lt;p&gt;
+     * If the file does not exist, a default configuration is created and written
+     * to disk. If the file exists but cannot be parsed (corrupt JSON), the default
+     * configuration is used and an error is logged.
+     * &lt;/p&gt;
+     *
+     * @param path the absolute path to the config JSON file
+     * @return the loaded (or newly created) config instance
+     */
+    public static ModConfig load(Path path) {
+        ModConfig config;
+
+        if (Files.exists(path)) {
+            try (Reader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
+                config = GSON.fromJson(reader, ModConfig.class);
+                if (config == null) {
+                    LOGGER.warn(&quot;Config file is empty or invalid JSON — using defaults.&quot;);
+                    config = new ModConfig();
+                }
+            } catch (IOException e) {
+                LOGGER.error(&quot;Failed to read config file at {}: {} — using defaults.&quot;,
+                        path, e.getMessage());
+                config = new ModConfig();
+            }
+        } else {
+            LOGGER.info(&quot;Config file not found at {} — creating with defaults.&quot;, path);
+            config = new ModConfig();
+            config.save(path);
+        }
+
+        // Clamp values to valid ranges
+        config.maxWidth = Math.max(100, Math.min(1920, config.maxWidth));
+        config.maxHeight = Math.max(100, Math.min(1080, config.maxHeight));
+        config.backgroundOpacity = Math.max(0.0f, Math.min(1.0f, config.backgroundOpacity));
+        config.maxImageSizeMB = Math.max(1, Math.min(100, config.maxImageSizeMB));
+
+        // Validate hex color format
+        if (config.highlightColor == null || !config.highlightColor.matches(&quot;#[0-9a-fA-F]{6}&quot;)) {
+            config.highlightColor = &quot;#58a6ff&quot;;
+        }
+
+        instance = config;
+        return config;
+    }
+
+    /**
+     * Saves the current configuration state to the given file path.
+     * Creates parent directories if they don&#x27;t exist.
+     *
+     * @param path the absolute path to write the config JSON
+     */
+    public void save(Path path) {
+        try {
+            // Ensure parent directory exists
+            Path parent = path.getParent();
+            if (parent != null &amp;&amp; !Files.exists(parent)) {
+                Files.createDirectories(parent);
+            }
+
+            try (Writer writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
+                GSON.toJson(this, writer);
+            }
+
+            LOGGER.debug(&quot;Config saved to {}&quot;, path);
+        } catch (IOException e) {
+            LOGGER.error(&quot;Failed to save config to {}: {}&quot;, path, e.getMessage());
+        }
+    }
+
+    // ─── Getters &amp; Setters ─────────────────────────────────────────────────────
+
+    public int getMaxWidth() {
+        return maxWidth;
+    }
+
+    public void setMaxWidth(int maxWidth) {
+        this.maxWidth = Math.max(100, Math.min(1920, maxWidth));
+    }
+
+    public int getMaxHeight() {
+        return maxHeight;
+    }
+
+    public void setMaxHeight(int maxHeight) {
+        this.maxHeight = Math.max(100, Math.min(1080, maxHeight));
+    }
+
+    public float getBackgroundOpacity() {
+        return backgroundOpacity;
+    }
+
+    public void setBackgroundOpacity(float backgroundOpacity) {
+        this.backgroundOpacity = Math.max(0.0f, Math.min(1.0f, backgroundOpacity));
+    }
+
+    public int getMaxImageSizeMB() {
+        return maxImageSizeMB;
+    }
+
+    public void setMaxImageSizeMB(int maxImageSizeMB) {
+        this.maxImageSizeMB = Math.max(1, Math.min(100, maxImageSizeMB));
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getHighlightColor() {
+        return highlightColor;
+    }
+
+    public void setHighlightColor(String highlightColor) {
+        if (highlightColor != null &amp;&amp; highlightColor.matches(&quot;#[0-9a-fA-F]{6}&quot;)) {
+            this.highlightColor = highlightColor;
+        }
+    }
+
+    public boolean isHoverPreview() {
+        return hoverPreview;
+    }
+
+    public void setHoverPreview(boolean hoverPreview) {
+        this.hoverPreview = hoverPreview;
+    }
+
+    public boolean isShowMetadata() {
+        return showMetadata;
+    }
+
+    public void setShowMetadata(boolean showMetadata) {
+        this.showMetadata = showMetadata;
+    }
+
+    public boolean isAnimateGifs() {
+        return animateGifs;
+    }
+
+    public void setAnimateGifs(boolean animateGifs) {
+        this.animateGifs = animateGifs;
+    }
+
+    /**
+     * Parses the highlight color hex string into an integer RGB value.
+     *
+     * @return RGB color as an integer (0xRRGGBB)
+     */
+    public int getHighlightColorInt() {
+        return Integer.parseInt(highlightColor.substring(1), 16);
+    }
+}
+</pre></div>
+  </div>
+
+  <div class="code-file" id="f-click">
+    <div class="code-file-head" onclick="toggleCode(this)"><span>ClickToRenderAction.java</span><span class="lang-tag">JAVA</span></div>
+    <div class="code-body"><pre>package studio.creaddinscart.imagepreviewer.chat;
+
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.ClickEvent;
+import net.minecraft.text.HoverEvent;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import studio.creaddinscart.imagepreviewer.ImagePreviewerMod;
+
+import java.awt.image.BufferedImage;
+
+/**
+ * Handles the &quot;click to preview&quot; interaction pipeline for an image URL in chat.
+ *
+ * @author GMA
+ * @since 1.0.0
+ */
+public class ClickToRenderAction {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImagePreviewerMod.MOD_ID + &quot;/ClickAction&quot;);
+
+    /**
+     * Creates a {@link ClickEvent} that triggers image preview when activated.
+     */
+    public static ClickEvent createPreviewClick(String imageUrl) {
+        String command = &quot;/imagepreviewer_preview &quot; + imageUrl;
+        return new ClickEvent(ClickEvent.Action.RUN_COMMAND, command);
+    }
+
+    /**
+     * Creates a {@link HoverEvent} showing a &quot;click to preview&quot; tooltip.
+     * On 1.21.4 {@link HoverEvent} is non-generic; {@code SHOW_TEXT} carries a {@link Text}.
+     */
+    public static HoverEvent createPreviewHover(String imageUrl) {
+        MutableText tooltip = Text.empty()
+                .append(Text.translatable(&quot;imagepreviewer.tooltip.click_to_preview&quot;)
+                        .formatted(Formatting.GREEN, Formatting.BOLD))
+                .append(Text.literal(&quot;\n&quot;))
+                .append(Text.literal(truncateUrl(imageUrl, 60)).formatted(Formatting.GRAY));
+        return new HoverEvent(HoverEvent.Action.SHOW_TEXT, tooltip);
+    }
+
+    /**
+     * Executes the image preview flow: cache check -&gt; async fetch -&gt; render.
+     */
+    public static void execute(String imageUrl) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client == null) {
+            LOGGER.error(&quot;MinecraftClient is null — cannot execute preview.&quot;);
+            return;
+        }
+
+        if (!ImagePreviewerMod.config.isEnabled()) {
+            sendChatMessage(client, Text.translatable(&quot;imagepreviewer.error.disabled&quot;).formatted(Formatting.YELLOW));
+            return;
+        }
+
+        if (imageUrl == null || imageUrl.isBlank()) {
+            sendChatMessage(client, Text.translatable(&quot;imagepreviewer.error.invalid_url&quot;).formatted(Formatting.RED));
+            return;
+        }
+
+        LOGGER.info(&quot;Preview requested for: {}&quot;, imageUrl);
+
+        BufferedImage cached = ImagePreviewerMod.imageFetcher.getCached(imageUrl);
+        if (cached != null) {
+            client.execute(() -&gt; ImagePreviewerMod.imageRenderer.displayImage(cached));
+            return;
+        }
+
+        sendChatMessage(client, Text.translatable(&quot;imagepreviewer.status.loading&quot;).formatted(Formatting.AQUA));
+
+        ImagePreviewerMod.imageFetcher.fetchAsync(imageUrl, image -&gt; {
+            if (image != null) {
+                client.execute(() -&gt; ImagePreviewerMod.imageRenderer.displayImage(image));
+            } else {
+                client.execute(() -&gt; sendChatMessage(client,
+                        Text.translatable(&quot;imagepreviewer.error.network&quot;).formatted(Formatting.RED)));
+            }
+        });
+    }
+
+    /**
+     * Builds a styled, clickable chat component for an image URL.
+     */
+    public static MutableText buildClickableText(String url) {
+        return Text.literal(url).styled(style -&gt; style
+                .withColor(Formatting.AQUA)
+                .withUnderline(true)
+                .withClickEvent(createPreviewClick(url))
+                .withHoverEvent(createPreviewHover(url)));
+    }
+
+    private static void sendChatMessage(MinecraftClient client, Text message) {
+        if (client.inGameHud != null) {
+            client.inGameHud.getChatHud().addMessage(message);
+        }
+    }
+
+    private static String truncateUrl(String url, int maxChars) {
+        if (url == null) return &quot;&quot;;
+        if (url.length() &lt;= maxChars) return url;
+        return url.substring(0, maxChars - 3) + &quot;...&quot;;
+    }
+}
+</pre></div>
+  </div>
+
+  <div class="code-file" id="f-manifest">
+    <div class="code-file-head" onclick="toggleCode(this)"><span>fabric.mod.json</span><span class="lang-tag">JSON</span></div>
+    <div class="code-body"><pre>{
+  "schemaVersion": 1,
+  "id": "imagepreviewer",
+  "version": "1.0.0",
+  "name": "Image Previewer",
+  "description": "Built by CREADDINSCART STUDIO. Renders linked images directly in-game from chat messages.",
+  "authors": ["GMA", "CREADDINSCART STUDIO"],
+  "contact": {
+    "homepage": "https://www.shit.pub/studio/",
+    "sources": "https://www.shit.pub/studio/"
+  },
+  "license": "MIT",
+  "icon": "assets/imagepreviewer/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["studio.creaddinscart.imagepreviewer.ImagePreviewerMod"]
+  },
+  "depends": {
+    "fabricloader": "&gt;=0.16.10",
+    "minecraft": "~1.21.4",
+    "java": "&gt;=21",
+    "fabric-api": "*"
+  }
+}</pre></div>
+  </div>
+</div>
+
+<!-- CONFIGURATION -->
+<div class="panel" id="config">
+  <h2>Configuration File</h2>
+  <p style="color:var(--dim);margin-bottom:16px">Generated automatically at <code style="background:#21262d;padding:2px 6px;border-radius:4px;color:var(--green)">.minecraft/config/imagepreviewer.json</code> on first launch.</p>
+
+  <table class="cfg-table">
+    <tr><th>Key</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>max_width</code></td><td>int</td><td>400</td><td>Max preview width in pixels (100&ndash;1920)</td></tr>
+    <tr><td><code>max_height</code></td><td>int</td><td>300</td><td>Max preview height in pixels (100&ndash;1080)</td></tr>
+    <tr><td><code>background_opacity</code></td><td>float</td><td>0.7</td><td>Dark overlay opacity behind image (0.0&ndash;1.0)</td></tr>
+    <tr><td><code>max_image_size_mb</code></td><td>int</td><td>10</td><td>Max download size in MB (1&ndash;100)</td></tr>
+    <tr><td><code>enabled</code></td><td>bool</td><td>true</td><td>Master toggle for the mod</td></tr>
+    <tr><td><code>highlight_color</code></td><td>string</td><td>"#58a6ff"</td><td>Hex color for detected links in chat</td></tr>
+    <tr><td><code>hover_preview</code></td><td>bool</td><td>false</td><td>Show preview on hover instead of click</td></tr>
+    <tr><td><code>show_metadata</code></td><td>bool</td><td>true</td><td>Display dimensions/size below preview</td></tr>
+    <tr><td><code>animate_gifs</code></td><td>bool</td><td>false</td><td>Play animated GIF frames (experimental)</td></tr>
+  </table>
+
+  <h2 style="margin-top:28px">Example Config</h2>
+  <div class="code-file">
+    <div class="code-file-head"><span>imagepreviewer.json</span><span class="lang-tag">JSON</span></div>
+    <div class="code-body open"><pre>{
+  "max_width": 500,
+  "max_height": 400,
+  "background_opacity": 0.6,
+  "max_image_size_mb": 15,
+  "enabled": true,
+  "highlight_color": "#7ee787",
+  "hover_preview": false,
+  "show_metadata": true,
+  "animate_gifs": false
+}</pre></div>
+  </div>
+</div>
+
+<!-- BUILD -->
+<div class="panel" id="build">
+  <h2>Build from Source</h2>
+  <p style="color:var(--dim);margin-bottom:16px">Verified build toolchain: <strong style="color:var(--text)">Gradle 9.9.2 + JDK 25 + Fabric Loom 1.20.0-alpha.31</strong>, compiling against Minecraft 1.21.4 (Yarn) with Java 21 bytecode target.</p>
+  <div class="build-steps">
+    <p style="font-weight:600;color:var(--text)">1. Clone the repository</p>
+    <pre>git clone https://www.shit.pub/studio/imagepreviewer.git
+cd imagepreviewer</pre>
+    <p style="font-weight:600;color:var(--text);margin-top:14px">2. Build the mod JAR</p>
+    <pre>JAVA_HOME=/path/to/jdk-25 ./gradlew build</pre>
+    <p style="font-weight:600;color:var(--text);margin-top:14px">3. Output (remapped, installable)</p>
+    <pre>build/libs/imagepreviewer-1.0.0.jar</pre>
+    <p style="font-weight:600;color:var(--text);margin-top:14px">4. Install</p>
+    <pre># Copy to .minecraft/mods/ with Fabric API also present (MC 1.21.4)
+cp build/libs/imagepreviewer-1.0.0.jar ~/.minecraft/mods/</pre>
+  </div>
+
+  <h2 style="margin-top:28px">Gradle Targets</h2>
+  <div class="code-file">
+    <div class="code-file-head"><span>build.gradle (excerpt)</span><span class="lang-tag">GROOVY</span></div>
+    <div class="code-body open"><pre>plugins {
+    id 'fabric-loom' version '1.20.0-alpha.31'
+}
+
+minecraft "com.mojang:minecraft:1.21.4"
+mappings "net.fabricmc:yarn:1.21.4+build.8:v2"
+modImplementation "net.fabricmc:fabric-loader:0.16.10"
+modImplementation "net.fabricmc.fabric-api:fabric-api:0.119.4+1.21.4"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}</pre></div>
+  </div>
+
+  <h2 style="margin-top:28px">Multi-Version Support</h2>
+  <div class="feat-grid">
+    <div class="feat"><h4>Fabric API Stability</h4><p>The core APIs (HUD rendering, chat events, commands) are stable across 1.16.5&ndash;1.21.x. Minimal code changes between versions.</p></div>
+    <div class="feat"><h4>Adapter Pattern</h4><p>For legacy versions (1.7.10 Forge, etc.), an adapter layer can bridge the rendering and chat hooks. See docs/MULTI_VERSION.md.</p></div>
+    <div class="feat"><h4>Reflection Fallback</h4><p>ImageFetcher uses standard java.net.http (Java 11+). On JRE 8 environments, a HttpURLConnection fallback is available.</p></div>
+  </div>
+</div>
+
+<!-- LICENSE -->
+<div class="panel" id="license">
+  <h2>MIT License</h2>
+  <div class="lic">
+    <p>Copyright (c) 2026 <strong style="color:var(--text)">CREADDINSCART STUDIO</strong> (GMA)</p>
+    <p style="margin-top:8px">Authorized and protected via <a href="https://www.shit.pub/studio/">https://www.shit.pub/studio/</a></p>
+    <p style="margin-top:14px">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+    <p style="margin-top:10px">The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+    <p style="margin-top:10px">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p>CREADDINSCART STUDIO &bull; <a href="https://www.shit.pub/studio/">shit.pub/studio</a> &bull; Image Previewer v1.0.0 &bull; MIT</p>
+  </div>
+</footer>
+
+<script>
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+
+// Code file toggle
+function toggleCode(head) {
+  const body = head.nextElementSibling;
+  body.classList.toggle('open');
+}
+</script>
+</body>
+</html>
